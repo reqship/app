@@ -1,0 +1,17 @@
+name: reqship.app
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    types: [opened, synchronize, edited]
+    branches: ["main", "dev"]
+
+jobs:
+  build-app:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build app Docker image
+        run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)

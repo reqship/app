@@ -1,0 +1,11 @@
+.quote{
+    line-height: normal;    
+    display: flex;
+    gap:10px;
+    overflow: auto;
+}
+.divider{
+    height: inherit;
+    width:0.4em;
+    border-radius: 10px;
+}

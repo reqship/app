@@ -1,0 +1,35 @@
+@keyframes loaderAnimation {
+    0% {transform: translateY(0);}
+    50%{transform: translateY(-10px);}
+    100%{transform: translateY(0);}
+}
+
+.loader{
+    transform: scale(0.5);
+    z-index: 1000;
+    & circle{
+    &:nth-child(1){
+        animation: loaderAnimation 0.75s infinite;
+        animation-delay:0;
+    }
+    &:nth-child(2){
+        animation: loaderAnimation 0.75s infinite;
+        animation-delay:0.5s;
+    }
+    &:nth-child(3){
+        animation: loaderAnimation 0.75s infinite;
+        animation-delay: 1s;
+
+    }
+    &:nth-child(4){
+        animation: loaderAnimation 0.75s infinite;
+        animation-delay: 1.5s;
+
+    }
+    &:nth-child(5){
+        animation: loaderAnimation 0.75s infinite;
+        animation-delay: 2s;
+
+    }}
+
+}

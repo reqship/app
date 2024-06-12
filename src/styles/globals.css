@@ -1,0 +1,28 @@
+:root {
+  --color-dark:#533B4D;
+  --color-light:#FAE3C6;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  color: var(--color-dark);
+  margin:0;
+}
+
+::selection{
+  background: var(--mantine-color-reqship-green-1);
+  color: var(--mantine-color-reqship-dark-5)
+}
+
+html,body{
+  margin:0;
+  padding: 0;
+  background-color: #FFFAF4 !important;
+}
+
+
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
