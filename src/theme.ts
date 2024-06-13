@@ -92,7 +92,7 @@ export const theme = createTheme({
     Loader: Loader.extend({
       defaultProps: {
         loaders: { ...Loader.defaultLoaders, custom: DotsLoader },
-        type: "oval",
+        type: "custom",
       },
     }),
   },
