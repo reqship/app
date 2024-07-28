@@ -1,7 +1,6 @@
 import { DM_Serif_Text, DM_Sans } from "next/font/google";
 import { generateColors } from "@mantine/colors-generator";
-import { Card, Loader, Text, Title, createTheme } from "@mantine/core";
-import DotsLoader from "@/components/loader";
+import { Card, Input, Loader, Text, Title, createTheme } from "@mantine/core";
 
 const headerFont = DM_Serif_Text({
   weight: "400",
@@ -75,6 +74,16 @@ export const theme = createTheme({
         c: "dark",
       },
     }),
+    Input: Input.extend({
+      defaultProps: {
+        variant: "filled",
+        styles: {
+          input: {
+            background: "#F0F0F0",
+          },
+        },
+      },
+    }),
     Title: Title.extend({
       defaultProps: {
         c: "dark",
@@ -87,12 +96,6 @@ export const theme = createTheme({
             borderColor: "#FFF6EA",
           },
         },
-      },
-    }),
-    Loader: Loader.extend({
-      defaultProps: {
-        loaders: { ...Loader.defaultLoaders, custom: DotsLoader },
-        type: "custom",
       },
     }),
   },
