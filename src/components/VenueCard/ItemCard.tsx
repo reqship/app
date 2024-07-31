@@ -10,9 +10,9 @@ import {
   Badge,
 } from "@mantine/core";
 
-export const ItemCard = ({ item, key }: { item: Item; key: number }) => {
+export const ItemCard = ({ item }: { item: Item; key: number }) => {
   return (
-    <Card key={key} mt="sm" withBorder bg="rgba(255,90,95,0.1)">
+    <Card mt="sm" withBorder bg="rgba(255,90,95,0.1)">
       <Group wrap="nowrap">
         <Image
           miw={75}

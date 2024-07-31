@@ -51,7 +51,6 @@ export const BasketContextProvider = ({
   };
 
   const editItemQuantity = (item: Item, quantity: number) => {
-    console.log(item, quantity);
     setItems((items) =>
       items.map((x) => (x.id == item.id ? { ...x, quantity } : x))
     );

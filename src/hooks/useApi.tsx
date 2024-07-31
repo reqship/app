@@ -1,3 +1,4 @@
+import { DotNetRes } from "@/api";
 import { useEffect, useState } from "react";
 
 // temporary, this can potentially be a hashed value in the future
@@ -24,6 +25,7 @@ export default function useApi<T>(
       apiCall()
         .then((data) => {
           setResponse(data);
+          return lastDependency;
         })
         .then(() => {
           setLoading(false);

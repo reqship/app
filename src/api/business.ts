@@ -1,5 +1,5 @@
 import { BusinessTag } from "@/helpers/businessTagHelper";
-import { GET } from ".";
+import { DotNetRes, GET, RejectIfUndefined } from ".";
 import { Item } from "./items";
 
 export interface Business {
@@ -18,7 +18,9 @@ export interface BusinessWithItems extends Business {
 export const getAllBusinesses = () => GET<Business[]>("business");
 
 export const getBusinessById = (id: string) => () =>
-  GET<Business>(`business/${id}`);
+  RejectIfUndefined(id, () => GET<DotNetRes<Business>>(`business/${id}`));
 
 export const getBusinessWithDetailsById = (id: string) => () =>
-  GET<BusinessWithItems>(`business/${id}/details`);
+  RejectIfUndefined(id, () =>
+    GET<DotNetRes<BusinessWithItems>>(`business/${id}/details`)
+  );

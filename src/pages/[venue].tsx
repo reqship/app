@@ -22,7 +22,7 @@ import {
 import PageHeading from "@/components/PageHeading";
 import { TbBeer, TbBurger, TbFilter, TbMusic, TbNumber } from "react-icons/tb";
 import { ItemCard } from "@/components/VenueCard/ItemCard";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { getBusinessTagInformation } from "@/helpers/businessTagHelper";
 import { useBasket } from "@/hooks/BasketProvider";
 import { BasketCard } from "@/components/VenueCard/BasketCard";
@@ -53,7 +53,7 @@ const VenuePageContent = ({ venue }: { venue: BusinessWithItems }) => {
   }, [basketContext.items]);
 
   return (
-    <>
+    <Fragment>
       <Box bg={"#FFFAF4"} style={{ zIndex: 1000 }} pos="sticky" top={20}>
         <PageHeading
           icon={<TbNumber size={32} color={theme.colors["reqship-pink"][6]} />}
@@ -115,7 +115,7 @@ const VenuePageContent = ({ venue }: { venue: BusinessWithItems }) => {
         Object.keys(Object.groupBy(queriedItems, (item) => item.section)).map(
           (section) => {
             return (
-              <>
+              <Fragment key={section}>
                 <Title order={3} mt="md" size={20}>
                   {section}
                 </Title>
@@ -130,7 +130,7 @@ const VenuePageContent = ({ venue }: { venue: BusinessWithItems }) => {
                     <ItemCard key={item.id} item={item} />
                   </Box>
                 ))}
-              </>
+              </Fragment>
             );
           }
         )}
@@ -148,10 +148,9 @@ const VenuePageContent = ({ venue }: { venue: BusinessWithItems }) => {
         >
           {!tableContext.table
             ? "Choose a table to continue"
-            : `Checkout ${basketContext.totalItems} item
-          ${
-            basketContext.totalItems > 1 ? "s" : ""
-          } (£${basketContext.total.toFixed(2)})`}
+            : `Checkout with ${basketContext.totalItems} item${
+                basketContext.totalItems > 1 ? "s" : ""
+              } £${basketContext.total.toFixed(2)}`}
         </Button>
       )}
       <Modal
@@ -175,7 +174,7 @@ const VenuePageContent = ({ venue }: { venue: BusinessWithItems }) => {
           Pay £{basketContext.total.toFixed(2)}
         </Button>
       </Modal>
-    </>
+    </Fragment>
   );
 };
 
@@ -191,7 +190,7 @@ export default function VenuePage() {
   return venueLoading ? (
     <Loader />
   ) : venue ? (
-    <VenuePageContent venue={venue} />
+    <VenuePageContent venue={venue as BusinessWithItems} />
   ) : (
     "Not found error"
   );

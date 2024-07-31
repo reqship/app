@@ -1,4 +1,4 @@
-import { GET } from ".";
+import { DotNetRes, GET } from ".";
 
 export interface Item {
   id: number;
@@ -12,4 +12,4 @@ export interface Item {
 }
 
 export const getItemsByBusinessId = (businessId: string) => () =>
-  GET<Item[]>(`item/business/${businessId}`);
+  GET<DotNetRes<Item[]>>(`item/business/${businessId}`);
