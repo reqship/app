@@ -1,6 +1,14 @@
 import { DM_Serif_Text, DM_Sans } from "next/font/google";
 import { generateColors } from "@mantine/colors-generator";
-import { Card, Input, Loader, Text, Title, createTheme } from "@mantine/core";
+import {
+  Card,
+  Input,
+  Loader,
+  Modal,
+  Text,
+  Title,
+  createTheme,
+} from "@mantine/core";
 
 const headerFont = DM_Serif_Text({
   weight: "400",
@@ -80,6 +88,19 @@ export const theme = createTheme({
         styles: {
           input: {
             background: "#F0F0F0",
+          },
+        },
+      },
+    }),
+    Modal: Modal.extend({
+      defaultProps: {
+        styles: {
+          content: {
+            padding: 10,
+          },
+          title: {
+            ...headerFont.style,
+            fontSize: 32,
           },
         },
       },

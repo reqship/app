@@ -1,3 +1,4 @@
+import { Business } from "@/api/business";
 import {
   Card,
   Text,
@@ -12,19 +13,12 @@ import { useRouter } from "next/router";
 
 export const FeaturedVenueCard = ({
   id,
-  businessName,
+  name,
   description,
   imageUrl,
   userId,
   textSearched = false,
-}: {
-  id: number;
-  businessName: string;
-  description: string;
-  imageUrl: string;
-  userId: number;
-  textSearched: boolean;
-}) => {
+}: Business & { textSearched: boolean }) => {
   const theme = useMantineTheme();
   const router = useRouter();
   return (
@@ -42,11 +36,11 @@ export const FeaturedVenueCard = ({
       >
         <Group wrap="nowrap">
           <Image
-            fallbackSrc=""
+            fallbackSrc="/business-placeholder-alt.png"
             w={100}
             h={100}
             bgp="center"
-            alt={businessName + " bar image"}
+            alt={name + " bar image"}
             src={imageUrl}
             radius="md"
           />
@@ -54,8 +48,8 @@ export const FeaturedVenueCard = ({
             <Text mb={0} pb={0} c="dark.3" fw="bold" size="xs">
               0.1KM AWAY
             </Text>
-            <Title lineClamp={1} mt={0} pt={0} order={3} size={24}>
-              {businessName}
+            <Title lineClamp={1} mt={0} pt={0} order={3} size={20}>
+              {name}
             </Title>
             <Text lineClamp={2} size="xs">
               {description}

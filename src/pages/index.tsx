@@ -1,6 +1,9 @@
+import { getAllBusinesses } from "@/api/business";
 import PageHeading from "@/components/PageHeading";
 import { FeaturedVenueCard } from "@/components/VenueCard/FeaturedVenueCard";
 import { VenueCard } from "@/components/VenueCard/VenueCard";
+import { useTable } from "@/hooks/TableProvider";
+import useApi from "@/hooks/useApi";
 import {
   ActionIcon,
   Box,
@@ -29,14 +32,21 @@ const SelectABarPage = ({ venues }: { venues: any[] }) => {
   const theme = useMantineTheme();
   const [queriedVenues, setQueriedVenues] = useState(venues);
   const [searchValue, setSearchValue] = useState("");
-
+  const tableContext = useTable();
   useEffect(() => {
     setQueriedVenues(
-      venues.filter((v) =>
-        v.businessName.toLowerCase().includes(searchValue.toLowerCase())
-      )
+      venues
+        .filter((v) =>
+          (v.name ?? "").toLowerCase().includes(searchValue.toLowerCase())
+        )
+        .sort((a, b) => (a.id < b.id ? 0 : 1))
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
+
+  useEffect(() => {
+    tableContext.setTable("");
+  }, []);
 
   return (
     <>
@@ -84,54 +94,6 @@ const SelectABarPage = ({ venues }: { venues: any[] }) => {
 };
 
 export default function Index() {
-  const [loading, setLoading] = useState(true);
-  const [venues, setVenues] = useState([
-    {
-      id: 1,
-      businessName: "Saint Luke's",
-      description:
-        "Lively eatery serving up burgers, pizza & pub grub staples, plus live music, beers & cocktails.",
-      imageUrl:
-        "https://www.stlukesglasgow.com/wp-content/uploads/2015/07/Website-Augustines2-900x600.jpg",
-      userId: 10,
-    },
-    {
-      id: 2,
-      businessName: "The Amsterdam",
-      description: "",
-      imageUrl:
-        "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2a/01/18/61/beer-garden.jpg?w=1200&h=-1&s=1",
-      userId: 10,
-    },
-    {
-      id: 3,
-      businessName: "Variety Bar",
-      description: "",
-      imageUrl:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSt1oKIDkQJCp6M_rzMtssr2I8DI2uGjr7A7A&s",
-      userId: 10,
-    },
-    {
-      id: 4,
-      businessName: "Box bar",
-      description: "",
-      imageUrl:
-        "https://boxglasgow.com/wp-content/gallery/Bar-Photos/Outside-1.jpg",
-      userId: 10,
-    },
-    {
-      id: 5,
-      businessName: "Oran Mor",
-      description: "",
-      imageUrl:
-        "https://cdn.venuescanner.com/photos/8OpBK/33a86454fc6348184a098754b4d0313c.jpg",
-      userId: 10,
-    },
-  ]);
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  }, []);
-  return loading ? <StartupPage /> : <SelectABarPage venues={venues} />;
+  const { response: venues, loading } = useApi(getAllBusinesses);
+  return loading ? <StartupPage /> : <SelectABarPage venues={venues ?? []} />;
 }
